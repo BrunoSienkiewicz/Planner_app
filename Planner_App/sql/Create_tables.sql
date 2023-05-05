@@ -1,0 +1,25 @@
+DROP TABLE IF EXISTS events CASCADE;
+DROP TABLE IF EXISTS to_do CASCADE;
+DROP TABLE IF EXISTS status CASCADE ;
+
+CREATE TABLE events (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    date TIMESTAMP NOT NULL
+);
+
+CREATE TABLE status (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+);
+
+INSERT INTO status (name) VALUES ('TODO'), ('DOING'), ('DONE');
+
+CREATE TABLE to_do (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    date TIMESTAMP NOT NULL,
+    status_id INTEGER NOT NULL REFERENCES status(id)
+);
